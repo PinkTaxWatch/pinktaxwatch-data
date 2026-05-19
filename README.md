@@ -4,6 +4,8 @@ Public-interest tracking of menstrual product affordability across European reta
 
 https://www.pinktaxwatch.com
 
+**Current snapshot:** 2026-05 · **Markets:** 9 · **Retail observations:** 38 · **Methodology version:** v1.0
+
 ---
 
 ## About
@@ -16,11 +18,11 @@ PinkTaxWatch is an independent data project comparing menstrual product affordab
 
 The project focuses on one question:
 
-> How much does a comparable monthly menstrual product basket cost relative to local wages depending on where someone lives?
+> How much does a comparable monthly menstrual product basket cost relative to local wages, depending on where someone lives?
 
 The current public release includes:
 
-* 9 European markets
+* 9 European markets (DE, AT, HU, CZ, UK, IE, DK, NL, BE)
 * 38 recorded retail price observations
 * affordability rankings
 * VAT-adjusted comparisons
@@ -34,6 +36,8 @@ The current dataset uses a normalized monthly basket:
 
 * 20 pads
 * 20 tampons
+
+This composition is designed to allow direct cross-category price comparisons across markets; it is not a prescriptive recommendation for individual consumption.
 
 For each country:
 
@@ -50,10 +54,10 @@ monthly basket cost ÷ average net monthly earnings
 Income reference:
 
 * Eurostat `earn_nt_net`
-* single full-time worker
-* no children
-* 100% of average wage
+* **Family Case A1** (single full-time worker, no children, 100% of average wage)
 * 2024 reference year
+
+VAT rates are verified per country against primary government sources, with verification dates recorded in the dataset metadata.
 
 The project prioritizes:
 
@@ -70,10 +74,10 @@ over statistical representativeness.
 The dataset combines:
 
 * publicly visible retail prices
-* country VAT rates
+* country VAT rates (primary government source per market)
 * Eurostat income data
 
-Retail observations are manually reviewed before publication.
+Retail observations are manually reviewed before publication. The current dataset is small by design — human verification catches substitution SKUs, sale prices, and pack-size variations that automated scraping would miss.
 
 ---
 
@@ -84,7 +88,6 @@ Retail observations are manually reviewed before publication.
   dataset-2026-05.csv
   country-summary-2026-05.json
   observations-2026-05.json
-
 /src
   components/
   pages/
@@ -99,9 +102,9 @@ Retail observations are manually reviewed before publication.
 * React
 * TypeScript
 * Tailwind
-* Airtable
-* Lovable
-* Cloudflare / Vercel
+* Google Sheets (published-to-web CSV — primary data source consumed by the frontend)
+* Lovable (build environment)
+* [hosting / CDN — fill in: Vercel / Netlify / Cloudflare Pages / etc.]
 
 AI-assisted workflows are used for:
 
@@ -125,6 +128,7 @@ Current limitations include:
 * no promotional pricing
 * no loyalty-card discounts
 * current-price lifetime calculations do not model future inflation
+* income reference data lags retail price observations by approximately 18 months due to Eurostat publication cycles — this may slightly overstate affordability burden in markets with rapid recent wage growth
 
 The dataset should be interpreted as:
 
@@ -145,27 +149,36 @@ All derived values displayed on the public site are computed from the published 
 
 ---
 
+## How to Cite
+
+If you reference this dataset, its derived rankings, or its visualizations in journalism, research, or policy work, please cite as:
+
+> PinkTaxWatch (2026). *Menstrual product affordability across European retail markets, 2026-05 snapshot.* Available at https://www.pinktaxwatch.com. Dataset licensed CC BY 4.0.
+
+When citing a specific data point, please include the snapshot date (`2026-05`) to support reproducibility across releases.
+
+---
+
 ## Future Work
 
 Planned future work may include:
 
 * additional European markets
-* longitudinal releases
-* regional comparisons
-* expanded product categories
+* longitudinal releases (multi-snapshot comparison)
+* regional comparisons within markets
+* expanded product categories (menstrual cups, period underwear, reusables)
 * work-time affordability metrics
+* perimenopause and postmenopause scope extension (lifetime cost models currently underestimate this phase)
+* search behavior as a public-interest data layer (aggregated keyword volume, public forum signals) — exploratory v2.0 scope
 
-The project is intentionally evolving slowly to preserve methodological consistency.
+The project is intentionally evolving slowly to preserve methodological consistency between releases.
 
 ---
 
 ## License
 
-Dataset:
-CC BY 4.0
-
-Code:
-MIT License
+* **Dataset:** CC BY 4.0 — free to use with attribution.
+* **Code:** MIT License.
 
 ---
 
@@ -185,8 +198,6 @@ This project does not represent:
 
 ## Contact
 
-Website:
-https://www.pinktaxwatch.com
-
-Issues and corrections:
-Use the GitHub Issues tab for dataset corrections, methodology questions, or feedback.
+* **Website:** https://www.pinktaxwatch.com
+* **Issues, corrections, methodology questions:** use the GitHub Issues tab
+* **Press, research, policy inquiries:** contact form on the website
