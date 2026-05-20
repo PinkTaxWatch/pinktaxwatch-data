@@ -1,5 +1,7 @@
 # PinkTaxWatch
 
+🔗 **Live site:** [pinktaxwatch.com](https://www.pinktaxwatch.com/)
+
 **An independent public-interest data observatory tracking menstrual product affordability across nine European markets.**
 
 PinkTaxWatch combines verified retail price observations, VAT rates, and wage-normalized affordability metrics into a comparable index across Germany, Austria, Hungary, Czechia, the United Kingdom, Ireland, Denmark, the Netherlands, and Belgium. The project is independent, non-commercial, and built around a deliberate methodological choice: human-observed retail prices over automated scraping, and verified policy data over aggregated estimates.
@@ -26,7 +28,7 @@ A complementary activism layer surfaces active petitions and policy contacts in 
 
 ## What this is
 
-The "pink ta (https://www.pinktaxwatch.com/) x" — the structural premium paid by women on essential products and services — is widely discussed but rarely quantified consistently across borders. Existing comparisons tend to be either national and anecdotal, or aggregated to a degree that loses the methodology trail.
+The "pink tax" — the structural premium paid by women on essential products and services — is widely discussed but rarely quantified consistently across borders. Existing comparisons tend to be either national and anecdotal, or aggregated to a degree that loses the methodology trail.
 
 PinkTaxWatch addresses this gap by maintaining a verified, transparent dataset of:
 
@@ -65,7 +67,7 @@ Scope expansion is deliberate and methodology-led. Additional markets and a peri
 
 ## Methodology
 
-A condensed summary is below. The full methodology, including decision rationale and versioning history, is published at [`/methodology`](#) on the live site and tracked in this repository as `METHODOLOGY_v1.0.0.md`.
+A condensed summary is below. The full methodology, including decision rationale and versioning history, is published at [pinktaxwatch.com/methodology](https://www.pinktaxwatch.com/methodology) on the live site and tracked in this repository as `METHODOLOGY_v1.0.0.md`.
 
 **Price observations**
 
@@ -102,7 +104,7 @@ Each source entry in the workbook records:
 - Storage location
 - Known risk flags
 
-A complete source inventory is published on the [`/methodology`](#) page.
+A complete source inventory is published on the [methodology page](https://www.pinktaxwatch.com/methodology).
 
 ---
 
@@ -112,17 +114,17 @@ The site is organized into the following primary surfaces:
 
 **Sections (W1–W8)** — A curated sequence of editorial sections covering project framing, the interactive market map, key affordability facts, the policy simulator (per-country VAT scenarios), the verified policy timeline (W5: "Policy chamber"), cross-market comparison cards, dispatch entry, and sources and transparency disclosure.
 
-**Dispatches** (`/dispatches`) — Editorial pieces examining specific aspects of menstrual product affordability and policy. Individual dispatch routes are linked from the hub.
+**Dispatches** ([`/dispatches`](https://www.pinktaxwatch.com/dispatches)) — Editorial pieces examining specific aspects of menstrual product affordability and policy. Individual dispatch routes are linked from the hub.
 
-**Policy archive** (`/policy`) — Verified policy entries documenting menstrual-product VAT reductions and removals across global jurisdictions, with primary-source citations.
+**Policy archive** ([`/policy`](https://www.pinktaxwatch.com/policy)) — Verified policy entries documenting menstrual-product VAT reductions and removals across global jurisdictions, with primary-source citations.
 
-**Methodology** (`/methodology`) — Full methodology disclosure, including data sources, decision log, and versioning history.
+**Methodology** ([`/methodology`](https://www.pinktaxwatch.com/methodology)) — Full methodology disclosure, including data sources, decision log, and versioning history.
 
-**Site index** (`/site-index`) — A structured, scannable index of all published content. Intended for transparency, QA, and citation workflows.
+**Site index** ([`/site-index`](https://www.pinktaxwatch.com/site-index)) — A structured, scannable index of all published content. Intended for transparency, QA, and citation workflows.
 
 **Petition routes** — A per-market action hub surfacing active petitions and policy contacts for each of the nine covered markets.
 
-A machine-readable `sitemap.xml` is published at the site root.
+A machine-readable [`sitemap.xml`](https://www.pinktaxwatch.com/sitemap.xml) is published at the site root.
 
 ---
 
