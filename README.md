@@ -1,176 +1,82 @@
-# PinkTaxWatch
+# PinkTaxWatch — Open Data Pipeline
 
-🔗 **Live site:** [pinktaxwatch.com](https://www.pinktaxwatch.com/)
+🔗 **Live site:** [pinktaxwatch.com](https://pinktaxwatch.com)  
+📊 **License:** Data CC-BY-4.0 · Code MIT  
+🗓️ **Cadence:** Monthly snapshots
 
-**An independent public-interest data observatory tracking menstrual product affordability across nine European markets.**
+Open, auditable data behind the **European Menstrual Affordability Index** — a monthly cross-country measure of how much menstrual essentials cost relative to female net income across all 27 EU member states.
 
-PinkTaxWatch combines verified retail price observations, VAT rates, and wage-normalized affordability metrics into a comparable index across Germany, Austria, Hungary, Czechia, the United Kingdom, Ireland, Denmark, the Netherlands, and Belgium. The project is independent, non-commercial, and built around a deliberate methodological choice: human-observed retail prices over automated scraping, and verified policy data over aggregated estimates.
-
-A complementary activism layer surfaces active petitions and policy contacts in each covered market. This is a deliberate hybrid — observatory and action hub — with the observatory's data claims kept strictly to what can be sourced and verified.
-
-> **Status:** Live. Content rewrites, UX iterations, and dataset expansions ongoing.
+This repository documents the methodology, upstream sources, and licensing for the public index. Every figure on the live site is reproducible from publicly available data using the formula and source mapping below.
 
 ---
 
-## Table of contents
+## What PinkTaxWatch measures
 
-- [What this is](#what-this-is)
-- [Markets covered](#markets-covered)
-- [Methodology](#methodology)
-- [Data sources](#data-sources)
-- [Site structure](#site-structure)
-- [Tech stack](#tech-stack)
-- [Local development](#local-development)
-- [Data governance and versioning](#data-governance-and-versioning)
-- [Contributing](#contributing)
+PinkTaxWatch publishes a monthly **Affordability Index** — a single comparable figure expressing the cost of a typical monthly basket of essential menstrual products as a share of female net median income in each EU member state.
 
----
+Results are reported in three forms:
 
-## What this is
-
-The "pink tax" — the structural premium paid by women on essential products and services — is widely discussed but rarely quantified consistently across borders. Existing comparisons tend to be either national and anecdotal, or aggregated to a degree that loses the methodology trail.
-
-PinkTaxWatch addresses this gap by maintaining a verified, transparent dataset of:
-
-- **Retail prices** for menstrual products, hand-recorded from named retailers with dated observations
-- **Applicable VAT rates** for menstrual products, sourced from primary national tax authority documentation
-- **Net wage normalization** using Eurostat's `earn_nt_net` Family Case A1 (single, no children, 100% of national average wage)
-- **A verified policy timeline** of menstrual-product VAT reductions and removals across global jurisdictions
-
-The combined output is an affordability index comparing menstrual product cost as a share of net income across the covered markets, with the underlying methodology fully disclosed.
-
-The project serves three audiences:
-
-1. **Readers and the general public** — accessible affordability comparisons and policy context
-2. **Journalists and researchers** — citable, source-tagged data with methodology transparency
-3. **Advocates and policymakers** — a structured reference point for cross-market comparison
+| Metric | What it shows |
+|---|---|
+| **% of monthly salary** | Headline affordability metric |
+| **Hours of work per year** | Annual time-cost equivalent at typical working hours |
+| **Lifetime cost (32-year cohort)** | Cumulative real-terms cost across a standard reproductive span |
 
 ---
 
-## Markets covered
+## Methodology in one sentence
 
-Nine European markets are currently in scope:
+> **Affordability Index = (Monthly basket price × current VAT) ÷ Net monthly income × 100**
 
-- Germany (DE)
-- Austria (AT)
-- Hungary (HU)
-- Czechia (CZ)
-- United Kingdom (UK)
-- Ireland (IE)
-- Denmark (DK)
-- Netherlands (NL)
-- Belgium (BE)
-
-Scope expansion is deliberate and methodology-led. Additional markets and a perimenopause/postmenopause cost extension are flagged as future scope.
+The basket is standardised across all 27 countries: a fixed-composition selection of mid-tier private-label menstrual essentials, priced from publicly listed retail averages and converted to EUR using ECB daily reference rates.
 
 ---
 
-## Methodology
+## Upstream sources
 
-A condensed summary is below. The full methodology, including decision rationale and versioning history, is published at [pinktaxwatch.com/methodology](https://www.pinktaxwatch.com/methodology) on the live site and tracked in this repository as `METHODOLOGY_v1.0.0.md`.
+The index does not generate primary data. It aggregates, normalises, and presents data from four established public sources:
 
-**Price observations**
+| Source | Used for | Dataset / reference |
+|---|---|---|
+| **Eurostat** | Female net median monthly income | `earn_nt_net` |
+| **European Commission TEDB** | Standard VAT rates and sanitary product classification | TEDB live database |
+| **European Central Bank** | Daily EUR reference exchange rates | ECB FX reference rates |
+| **Local retail averages** | Mid-tier private-label menstrual product pricing | Curated monthly |
 
-- Hand-recorded from named retailers (e.g. DM, Rossmann, Tesco) with observation dates
-- Substitution SKUs and temporary sale prices are flagged by the human observer — a methodological advantage over automated scraping
-- Retailer inventory and refresh cadence are documented per source
-
-**VAT verification**
-
-- Per-country, sourced from primary national tax authority documentation
-- Verification dates recorded; updates triggered by published rate changes
-
-**Wage normalization**
-
-- Eurostat `earn_nt_net` Family Case A1 (single, no children, 100% of national average wage)
-- FX conversion via European Central Bank reference rates
-
-**What this project does not claim**
-
-- This is not a meta-analysis, systematic review, or epidemiological study. Methodology badges suggesting otherwise are explicitly not used.
-- Headline disparities and rankings are reported only where the underlying observations and verification dates support them.
+Every monthly snapshot is timestamped against the snapshot date of each upstream source.
 
 ---
 
-## Data sources
+## Update cadence
 
-The data layer is intentionally simple at this scale: a Google Sheets workbook published as CSV and fetched by the frontend. Snowflake, Databricks, and automated scraping were evaluated and rejected — the first two for being disproportionate to the data volume, and the third for legal exposure and methodological disadvantage (loss of human-flagged substitution and sale-price context).
-
-Each source entry in the workbook records:
-
-- Source name (retailer or authority)
-- Observation or verification date
-- Refresh cadence
-- Storage location
-- Known risk flags
-
-A complete source inventory is published on the [methodology page](https://www.pinktaxwatch.com/methodology).
+- **Monthly** — retail basket pricing, ECB FX rates, snapshot publication
+- **Quarterly** — TEDB VAT rate audit
+- **Annual** — Eurostat income data refresh
+- **Continuous** — VAT change log updated whenever a member state changes a rate
 
 ---
 
-## Site structure
+## License
 
-The site is organized into the following primary surfaces:
-
-**Sections (W1–W8)** — A curated sequence of editorial sections covering project framing, the interactive market map, key affordability facts, the policy simulator (per-country VAT scenarios), the verified policy timeline (W5: "Policy chamber"), cross-market comparison cards, dispatch entry, and sources and transparency disclosure.
-
-**Dispatches** ([`/dispatches`](https://www.pinktaxwatch.com/dispatches)) — Editorial pieces examining specific aspects of menstrual product affordability and policy. Individual dispatch routes are linked from the hub.
-
-**Policy archive** ([`/policy`](https://www.pinktaxwatch.com/policy)) — Verified policy entries documenting menstrual-product VAT reductions and removals across global jurisdictions, with primary-source citations.
-
-**Methodology** ([`/methodology`](https://www.pinktaxwatch.com/methodology)) — Full methodology disclosure, including data sources, decision log, and versioning history.
-
-**Site index** ([`/site-index`](https://www.pinktaxwatch.com/site-index)) — A structured, scannable index of all published content. Intended for transparency, QA, and citation workflows.
-
-**Petition routes** — A per-market action hub surfacing active petitions and policy contacts for each of the nine covered markets.
-
-A machine-readable [`sitemap.xml`](https://www.pinktaxwatch.com/sitemap.xml) is published at the site root.
+- **Data** — published under [Creative Commons Attribution 4.0 International (CC-BY-4.0)](https://creativecommons.org/licenses/by/4.0/). Free to use, share, and adapt for any purpose, including commercially, with attribution.
+- **Code** (when published) — released under the [MIT License](https://opensource.org/licenses/MIT).
 
 ---
 
-## Tech stack
+## Citation
 
-- **Frontend:** React, TypeScript, Tailwind CSS, TanStack Router
-- **Build environment:** Lovable
-- **Data layer:** Google Sheets (CSV published to web)
-- **Typography:** Fraunces (editorial headlines), JetBrains Mono (metadata and labels), Inter (body)
-- **Visual identity:** SVG geometry, radial burgundy and coral glows, dark theme throughout
+If you use PinkTaxWatch data in research, journalism, or analysis, please cite as:
+
+> PinkTaxWatch (2026). *European Menstrual Affordability Index*. https://github.com/PinkTaxWatch/pinktaxwatch-data
 
 ---
 
-## Local development
+## Contact
 
-```bash
-# Clone the repository
-git clone [repo URL]
-cd pinktaxwatch
-
-# Install dependencies
-npm install
-
-# Start the development server
-npm run dev
-```
-
-Environment variables and configuration steps will be documented here as they're finalized.
+- **Project site:** [pinktaxwatch.com](https://pinktaxwatch.com)
+- **Data corrections, source flags, methodology questions:** [open an Issue](https://github.com/PinkTaxWatch/pinktaxwatch-data/issues)
+- **Editorial inquiries:** [info@pinktaxwatch.com](mailto:info@pinktaxwatch.com)
 
 ---
 
-## Data governance and versioning
-
-- Methodology decisions are governed by versioned markdown documents (e.g. `METHODOLOGY_v1.0.0.md`) under source control
-- Source inventory is maintained with snapshot dates and refresh cadence per source
-- Data changes affecting headline figures are surfaced in dispatch updates with dates and source links
-- Localization is maintained in English and Hungarian
-
----
-
-## Contributing
-
-PinkTaxWatch is currently maintained by a single project lead with technical input from a small advisory group. The project is not open to external contributions to the dataset at this stage — methodology integrity depends on a controlled observation process.
-
-Editorial corrections, broken-link reports, and methodology questions are welcome.
-
----
-
-PinkTaxWatch is independent, non-commercial, and not affiliated with any retailer, tax authority, or advocacy organization referenced in the dataset.
+*PinkTaxWatch is an independent, non-commercial public-interest project. Not affiliated with any retailer, tax authority, or advocacy organisation referenced in the dataset.*
