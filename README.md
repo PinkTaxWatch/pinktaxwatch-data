@@ -26,7 +26,7 @@ A complementary activism layer surfaces active petitions and policy contacts in 
 
 ## What this is
 
-The "pink tax" — the structural premium paid by women on essential products and services — is widely discussed but rarely quantified consistently across borders. Existing comparisons tend to be either national and anecdotal, or aggregated to a degree that loses the methodology trail.
+The "pink ta (https://www.pinktaxwatch.com/) x" — the structural premium paid by women on essential products and services — is widely discussed but rarely quantified consistently across borders. Existing comparisons tend to be either national and anecdotal, or aggregated to a degree that loses the methodology trail.
 
 PinkTaxWatch addresses this gap by maintaining a verified, transparent dataset of:
 
